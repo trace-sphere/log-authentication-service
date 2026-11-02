@@ -25,25 +25,25 @@ public class InterServiceEndpointFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (authHeader != null) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-        String requestURI = request.getRequestURI();
-        AntPathMatcher antPathMatcher = new AntPathMatcher();
-        boolean matches =
-                antPathMatcher
-                        .match("/authentication-service/userAuth/api/apiKeyDetails/**", requestURI) || antPathMatcher
-                        .match("/authentication-service/apiKey/getDetails/apikies", requestURI);
-        //the next public endpoints to be added by || like || antMatcher.matches(example/get/**)
-        if (matches) {
-            final String requestAccessKey = request.getHeader(Constants.CustomHeader.X_ACCESS_KEY);
-            if (!Objects.equals(publicApiKey, requestAccessKey)) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
-            }
-        }
+//        String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+//        if (authHeader != null) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
+//        String requestURI = request.getRequestURI();
+//        AntPathMatcher antPathMatcher = new AntPathMatcher();
+//        boolean matches =
+//                antPathMatcher
+//                        .match("/authentication-service/userAuth/api/apiKeyDetails/**", requestURI) || antPathMatcher
+//                        .match("/authentication-service/apiKey/getDetails/apikies", requestURI);
+//        //the next public endpoints to be added by || like || antMatcher.matches(example/get/**)
+//        if (matches) {
+//            final String requestAccessKey = request.getHeader(Constants.CustomHeader.X_ACCESS_KEY);
+//            if (!Objects.equals(publicApiKey, requestAccessKey)) {
+//                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+//                return;
+//            }
+//        }
         filterChain.doFilter(request, response);
     }
 }

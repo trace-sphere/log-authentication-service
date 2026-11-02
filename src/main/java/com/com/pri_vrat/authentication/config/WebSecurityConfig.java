@@ -23,7 +23,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/userAuth/api/apiKeyDetails/**").permitAll()
                         .requestMatchers("/apiKey/getDetails/apikies")
                         .hasAuthority(Constants.SERVICE_ROLE.INTERNAL_SCHEDULER)
-                        .requestMatchers("/internal/authenticate/scheduler").permitAll()
+                        .requestMatchers("/internal/authenticate/scheduler")
+                        .permitAll()
                         .anyRequest().authenticated()
         );
         http.csrf(AbstractHttpConfigurer::disable);
