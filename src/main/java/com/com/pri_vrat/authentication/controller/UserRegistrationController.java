@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("userAuth/api")
-@CrossOrigin("http://localhost:4300")
 public class UserRegistrationController {
 
     private final AccountManagementService userService;
